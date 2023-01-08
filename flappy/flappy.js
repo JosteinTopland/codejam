@@ -42,7 +42,7 @@ function mousePressed() {
 
 function jump() {
   v = -5;
-  mySynth.play('A6');
+  synth.play('A6');
 }
 
 function draw() {
