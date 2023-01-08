@@ -9,9 +9,12 @@ let py = [];
 let score;
 let highScore = 0;
 let pipes = 4;
+let synth;
 
 function setup() {
+  getAudioContext().suspend();
   createCanvas(320, 200);
+  synth = new p5.MonoSynth();
   noStroke();
   frameRate(20);
   restart();
@@ -29,11 +32,17 @@ function restart() {
 }
 
 function keyPressed() {
-  v = -5;
+  jump();
 }
 
 function mousePressed() {
+  userStartAudio();
+  jump();
+}
+
+function jump() {
   v = -5;
+  mySynth.play('A6');
 }
 
 function draw() {
