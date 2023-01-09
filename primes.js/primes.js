@@ -1,4 +1,4 @@
-// Prime Music & Colors
+// Prime pixels & sound
 // jostein.topland@gmail.com
 
 const w = 320;
@@ -11,21 +11,23 @@ const fps = 3;
 const boxSize = 8;
 const inc = 10;
 const pitch = {
-	A: 220.00,
-	B: 246.94,
-	C: 261.63,
-	D: 293.66,
-	E: 329.63,
-	F: 349.23,
-	G: 392.00,
-	A2: 440,
-	A9: 2732,
-	B9: 3625,
-	C9: 3290,
-	D9: 2343
+  A: 220.00,
+  B: 246.94,
+  C: 261.63,
+  D: 293.66,
+  E: 329.63,
+  F: 349.23,
+  G: 392.00,
+  A2: 440,
+  A9: 2732,
+  B9: 3625,
+  C9: 3290,
+  D9: 2343
 };
 
 function setup() {
+  getAudioContext().suspend();
+
   createCanvas(w, h);
   x = w / 2;
   y = h / 2;
@@ -45,6 +47,10 @@ function setup() {
   colorMode(HSB);
   background(240, 50, 255);
   frameRate(fps);
+}
+
+function mousePressed() {
+  userStartAudio();
 }
 
 function draw() {
