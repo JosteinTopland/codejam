@@ -1,4 +1,4 @@
-// Jump'n Run
+// lolo.js
 // jostein.topland@gmail.com
 
 const width = 320;

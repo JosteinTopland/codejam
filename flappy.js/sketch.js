@@ -1,7 +1,5 @@
-/*
-  Flappy JS
-  jostein.topland@gmail.com
-*/
+// flappy.js
+// jostein.topland@gmail.com
 
 let x, y, v;
 let px = [];

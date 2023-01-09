@@ -1,4 +1,4 @@
-// Prime pixels & sound
+// primes.js
 // jostein.topland@gmail.com
 
 const w = 320;
