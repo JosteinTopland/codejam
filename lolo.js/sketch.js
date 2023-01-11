@@ -21,7 +21,7 @@ const level = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
   ]
 };
-const player = { x: 0, y: 0, xVel: 0, yVel: 0 };
+const player = { x: 0, y: 0, direction: 'Stop' };
 
 function setup() {
   createCanvas(width, height);
@@ -41,22 +41,36 @@ function hitTest(x, y) {
 }
 
 function inputKeys() {
-  player.xVel = 0;
-  if (keyIsDown(LEFT_ARROW)) player.xVel = -1;
-  if (keyIsDown(RIGHT_ARROW)) player.xVel = 1;
-  if (keyIsDown(UP_ARROW)) player.yVel = -4;
+  if (player.direction !== 'Stop') return;
+  if (keyIsDown(LEFT_ARROW)) player.direction = 'Left';
+  if (keyIsDown(RIGHT_ARROW)) player.direction = 'Right';
+  if (keyIsDown(UP_ARROW)) player.direction = 'Up';
+  if (keyIsDown(DOWN_ARROW)) player.direction = 'Down';
+}
 
-  if (hitTest(player.x + player.xVel, player.y + player.yVel)) {
-    player.yVel = 0;
+function updateGame() {
+  let x = 0;
+  let y = 0;
+  let speed = 2;
+  if (player.direction === 'Left') x -= speed;
+  if (player.direction === 'Right') x += speed;
+  if (player.direction === 'Up') y -= speed;
+  if (player.direction === 'Down') y += speed;
+  if (hitTest(player.x + x, player.y + y)) {
+    player.direction = 'Stop';
   } else {
-    player.yVel += 1;
+    player.x += x;
+    player.y += y;
+    if (['Left', 'Right'].includes(player.direction) && player.x % (gridSize / 2) === 0 ||
+        ['Up', 'Down'].includes(player.direction) && player.y % (gridSize / 2) === 0) {
+          player.direction = 'Stop';
+    }
   }
-  player.x += player.xVel;
-  player.y += player.yVel;
 }
 
 function draw() {
   inputKeys();
+  updateGame();
   background(50, 50, 100);
   translate(20, 20);
   drawMap();
