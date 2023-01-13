@@ -43,18 +43,18 @@ function hitTest(x, y) {
   const py1 = Math.floor(y / gridSize) * level.width;
   const px2 = Math.floor((x + gridSize - 1) / gridSize);
   const py2 = Math.floor((y + gridSize - 1) / gridSize) * level.width;
-  const ignore = [0, 9];
-  const idx1 = level.map[px1 + py1] >= 0x10;
-  const idx2 = level.map[px2 + py1] >= 0x10;
-  const idx3 = level.map[px2 + py2] >= 0x10;
-  const idx4 = level.map[px1 + py2] >= 0x10;
+  const collision = 0x10;
+  const idx1 = level.map[px1 + py1] >= collision;
+  const idx2 = level.map[px2 + py1] >= collision;
+  const idx3 = level.map[px2 + py2] >= collision;
+  const idx4 = level.map[px1 + py2] >= collision;
   return x < 0 || x > (level.width - 1) * gridSize ||
          y < 0 || y > (level.height - 1) * gridSize ||
          idx1 || idx2 || idx3 || idx4;
 }
 
 function inputKeys() {
-  // if (player.direction !== 'Stop') return;
+  if (player.direction !== 'Stop') return;
   if (keyIsDown(LEFT_ARROW)) player.direction = 'Left';
   if (keyIsDown(RIGHT_ARROW)) player.direction = 'Right';
   if (keyIsDown(UP_ARROW)) player.direction = 'Up';
@@ -73,9 +73,10 @@ function updateGame() {
   } else {
     player.x += x;
     player.y += y;
-    if (['Left', 'Right'].includes(player.direction) && player.x % (gridSize / 2) === 0 ||
-        ['Up', 'Down'].includes(player.direction) && player.y % (gridSize / 2) === 0) {
-          // player.direction = 'Stop';
+    if (!keyIsPressed &&
+      (['Left', 'Right'].includes(player.direction) && player.x % (gridSize / 2) === 0 ||
+       ['Up', 'Down'].includes(player.direction) && player.y % (gridSize / 2) === 0)) {
+      player.direction = 'Stop';
     }
   }
 }
