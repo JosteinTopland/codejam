@@ -7,5 +7,5 @@ http://josteintopland.github.io/codejam/primes.js/index.html
 # lolo.js
 http://josteintopland.github.io/codejam/lolo.js/index.html
 
-# cracktro, paranormia.js
+# paranormia.js (cracktro)
 http://josteintopland.github.io/codejam/cracktro.js/paranormia.html
